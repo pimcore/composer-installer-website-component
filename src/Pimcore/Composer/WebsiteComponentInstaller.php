@@ -14,12 +14,12 @@ class WebsiteComponentInstaller extends LibraryInstaller
 	
     public function __construct(IOInterface $io, Composer $composer, $type = 'library', Filesystem $filesystem = null) {
     	
+     	parent::__construct($io, $composer, $type, $filesystem);
+
     	$this->filesystem = new \Pimcore\Composer\Tool\WebsiteComponentInstallerFilesystem(); 
     	
     	$downloadManager = new DownloadManager($io, false, $this->filesystem);
     	$this->downloadManager = $downloadManager; 
-    	
-    	parent::__construct($io, $composer, $type, $filesystem);
     }
 	
     /**
