@@ -5,7 +5,11 @@ class WebsiteComponentInstallerFilesystem extends \Composer\Util\Filesystem
 {
     public function copyThenRemove($source, $target)
     {
-        echo "-----> " . $target . "\n"; 
+        $log = "/tmp/composer.log"; 
+        
+        $f = fopen($log, "a+");
+        fwrite($f, "source: " . $source . "\n" . "target: " . $target . "\n----------\n");
+        fclose($f);
         
         parent::copyThenRemove($source, $target); 
     }
