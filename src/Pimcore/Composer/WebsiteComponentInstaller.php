@@ -4,6 +4,9 @@ namespace Pimcore\Composer;
 
 use Composer\Package\PackageInterface;
 use Composer\Installer\LibraryInstaller;
+use Composer\IO\IOInterface; 
+use Composer\Composer; 
+use Composer\Util\Filesystem; 
 
 class WebsiteComponentInstaller extends LibraryInstaller
 {
