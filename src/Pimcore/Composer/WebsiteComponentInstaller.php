@@ -11,27 +11,6 @@ use Composer\Downloader\DownloadManager;
 
 class WebsiteComponentInstaller extends LibraryInstaller
 {
-	
-    public function __construct(IOInterface $io, Composer $composer, $type = 'library', Filesystem $filesystem = null) {
-    	
-     	parent::__construct($io, $composer, $type, $filesystem);
-
-    	$this->filesystem = new \Pimcore\Composer\Tool\WebsiteComponentInstallerFilesystem(); 
-    	
-    	$downloadManager = new DownloadManager($io, false, $this->filesystem);
-    	
-    	foreach(["archive","file","git","gzip","hg","path","pear","perforce","phar","rar","svn","tar","vcs","xz","zip"] as $downloaderType) {
-    	    try {
-    	        $downloader = $composer->getDownloadManager()->getDownloader($downloaderType); 
-    	        $downloadManager->setDownloader($downloaderType, $downloader); 
-    	    } catch (\Exception $e) {
-    	        // nothing 
-    	    }
-    	}
-    	
-    	$this->downloadManager = $downloadManager; 
-    }
-	
     /**
      * {@inheritDoc}
      */
@@ -43,6 +22,10 @@ class WebsiteComponentInstaller extends LibraryInstaller
 	    }
 		
         return $docRootName . "/";
+    }
+
+    protected function removeCode(PackageInterface $package)
+    {
     }
 
     /**
