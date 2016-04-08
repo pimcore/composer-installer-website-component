@@ -34,7 +34,7 @@ class WebsiteComponentInstaller extends LibraryInstaller
         $this->downloadManager->download($package, $downloadPath);
         
         $targetPath = $this->getInstallPath($package);
-        foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($downloadPath)) as $file) {
+        foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($downloadPath)) as $file) {
             if(is_file($file->getPathName())) {
                 $relativePath = preg_replace("@^" . preg_quote($downloadPath, "@") . "@", "", $file->getPathName());
                 if(preg_match("@^website/@", $relativePath)) {
@@ -49,9 +49,9 @@ class WebsiteComponentInstaller extends LibraryInstaller
         }
         
         // cleanup tmp
-        $files = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($downloadPath, RecursiveDirectoryIterator::SKIP_DOTS),
-            RecursiveIteratorIterator::CHILD_FIRST
+        $files = new \RecursiveIteratorIterator(
+            new \RecursiveDirectoryIterator($downloadPath, \RecursiveDirectoryIterator::SKIP_DOTS),
+            \RecursiveIteratorIterator::CHILD_FIRST
         );
 
         foreach ($files as $fileinfo) {
