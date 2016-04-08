@@ -1,8 +1,5 @@
 <?php 
-namespace Pimcore\Composer;
-
-use Composer\Package\PackageInterface;
-use Composer\Installer\LibraryInstaller;
+namespace Pimcore\Composer\Tool;
 
 class WebsiteComponentInstallerFilesystem extends \Composer\Util\Filesystem
 {
