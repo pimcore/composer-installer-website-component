@@ -18,8 +18,8 @@ class WebsiteComponentInstaller extends LibraryInstaller
 
     	$this->filesystem = new \Pimcore\Composer\Tool\WebsiteComponentInstallerFilesystem(); 
     	
-    	$downloadManager = new DownloadManager($io, false, $this->filesystem);
-    	$this->downloadManager = $downloadManager; 
+    	//$downloadManager = new DownloadManager($io, false, $this->filesystem);
+    	//$this->downloadManager = $downloadManager; 
     }
 	
     /**
