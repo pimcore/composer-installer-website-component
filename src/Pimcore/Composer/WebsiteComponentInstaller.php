@@ -8,6 +8,8 @@ use Composer\IO\IOInterface;
 use Composer\Composer; 
 use Composer\Util\Filesystem; 
 use Composer\Downloader\DownloadManager;
+use Composer\Repository\InstalledRepositoryInterface;
+use Composer\Util\Silencer;
 
 class WebsiteComponentInstaller extends LibraryInstaller
 {
