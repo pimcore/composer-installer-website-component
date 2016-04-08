@@ -7,6 +7,7 @@ use Composer\Installer\LibraryInstaller;
 use Composer\IO\IOInterface; 
 use Composer\Composer; 
 use Composer\Util\Filesystem; 
+use Composer\Downloader\DownloadManager;
 
 class WebsiteComponentInstaller extends LibraryInstaller
 {
@@ -14,6 +15,9 @@ class WebsiteComponentInstaller extends LibraryInstaller
     public function __construct(IOInterface $io, Composer $composer, $type = 'library', Filesystem $filesystem = null) {
     	
     	$this->filesystem = new \Pimcore\Composer\Tool\WebsiteComponentInstallerFilesystem(); 
+    	
+    	$downloadManager = new DownloadManager($io, false, $this->filesystem);
+    	$this->downloadManager = $downloadManager; 
     	
     	parent::__construct($io, $composer, $type, $filesystem);
     }
