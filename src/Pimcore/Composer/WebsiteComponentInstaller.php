@@ -47,6 +47,19 @@ class WebsiteComponentInstaller extends LibraryInstaller
                 }
             }
         }
+        
+        // cleanup tmp
+        $files = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($downloadPath, RecursiveDirectoryIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
+
+        foreach ($files as $fileinfo) {
+            $todo = ($fileinfo->isDir() ? 'rmdir' : 'unlink');
+            $todo($fileinfo->getRealPath());
+        }
+
+        rmdir($downloadPath);
     }
 
     public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
