@@ -11,6 +11,6 @@ class WebsiteComponentInstallerFilesystem extends \Composer\Util\Filesystem
         fwrite($f, "source: " . $source . "\n" . "target: " . $target . "\n----------\n");
         fclose($f);
         
-        parent::copyThenRemove($source, $target); 
+        //parent::copyThenRemove($source, $target); 
     }
 }
