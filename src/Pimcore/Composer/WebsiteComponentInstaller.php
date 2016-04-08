@@ -24,7 +24,7 @@ class WebsiteComponentInstaller extends LibraryInstaller
     	    try {
     	        $downloader = $composer->getDownloadManager()->getDownloader($downloaderType); 
     	        $downloadManager->setDownloadManager($downloaderType, $downloader); 
-    	    } catch (\Exception $) {
+    	    } catch (\Exception $e) {
     	        // nothing 
     	    }
     	}
