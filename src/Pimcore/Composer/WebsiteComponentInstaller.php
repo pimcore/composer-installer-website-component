@@ -29,11 +29,11 @@ class WebsiteComponentInstaller extends LibraryInstaller
     protected function installCode(PackageInterface $package)
     {
     	
-    	$downloadPath = $this->getInstallPath() . "website/var/system/composer-website-" . uniqid() . "/";
+    	$downloadPath = $this->getInstallPath($package) . "website/var/system/composer-website-" . uniqid() . "/";
     	mkdir($downloadPath, 0777);
         $this->downloadManager->download($package, $downloadPath);
         
-        $targetPath = $this->getInstallPath();
+        $targetPath = $this->getInstallPath($package);
         foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($downloadPath)) as $file) {
             if(is_file($file->getPathName())) {
                 $relativePath = preg_replace("@^" . preg_quote($downloadPath, "@") . "@", "", $file->getPathName());
