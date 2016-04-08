@@ -24,8 +24,31 @@ class WebsiteComponentInstaller extends LibraryInstaller
         return $docRootName . "/";
     }
 
+    protected function updateCode(PackageInterface $initial, PackageInterface $target)
+    {
+        // foo
+    }
+    
+    protected function installCode(PackageInterface $package)
+    {
+        // foo
+    }
+
+    public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
+    {
+        // foo
+    }
+
+
+
     protected function removeCode(PackageInterface $package)
     {
+    	// foo
+    }
+    
+    protected function removeBinaries(PackageInterface $package) 
+    {
+    	// foo
     }
 
     /**
