@@ -23,7 +23,7 @@ class WebsiteComponentInstaller extends LibraryInstaller
     	foreach(["archive","file","git","gzip","hg","path","pear","perforce","phar","rar","svn","tar","vcs","xz","zip"] as $downloaderType) {
     	    try {
     	        $downloader = $composer->getDownloadManager()->getDownloader($downloaderType); 
-    	        $downloadManager->setDownloadManager($downloaderType, $downloader); 
+    	        $downloadManager->setDownloader($downloaderType, $downloader); 
     	    } catch (\Exception $e) {
     	        // nothing 
     	    }
