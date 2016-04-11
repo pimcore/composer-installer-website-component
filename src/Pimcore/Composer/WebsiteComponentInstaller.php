@@ -43,7 +43,9 @@ class WebsiteComponentInstaller extends LibraryInstaller
                         mkdir(dirname($targetFile), 0755, true);
                     }
 
-                    copy($file->getPathName(), $targetFile);
+		            if(!file_exists($targetFile)) {
+                        copy($file->getPathName(), $targetFile);
+		            }
                 }
             }
         }
