@@ -18,6 +18,13 @@ class WebsiteComponentInstaller extends LibraryInstaller
      */
     public function getInstallPath(PackageInterface $package)
     {
+        return $this->getDocumentRoot() . "website/var/composer/" . $package->getName() . "/";
+    }
+
+    /**
+     * @return string
+     */
+    protected function getDocumentRoot() {
         $docRootName = "./";
         if ($configDocRoot = $this->composer->getConfig()->get("document-root-path")) {
             $docRootName = rtrim($configDocRoot, "/");
@@ -26,14 +33,16 @@ class WebsiteComponentInstaller extends LibraryInstaller
         return $docRootName . "/";
     }
 
+    /**
+     * @param PackageInterface $package
+     */
     protected function installCode(PackageInterface $package)
     {
+        parent::installCode($package);
 
-        $downloadPath = $this->getInstallPath($package) . "website/var/system/composer-website-" . uniqid() . "/";
-        mkdir($downloadPath, 0777);
-        $this->downloadManager->download($package, $downloadPath);
+        $downloadPath = $this->getInstallPath($package);
+        $targetPath = $this->getDocumentRoot();
 
-        $targetPath = $this->getInstallPath($package);
         foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($downloadPath)) as $file) {
             if (is_file($file->getPathName())) {
                 $relativePath = preg_replace("@^" . preg_quote($downloadPath, "@") . "@", "", $file->getPathName());
@@ -49,34 +58,6 @@ class WebsiteComponentInstaller extends LibraryInstaller
                 }
             }
         }
-
-        // cleanup tmp
-        $files = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($downloadPath, \RecursiveDirectoryIterator::SKIP_DOTS),
-            \RecursiveIteratorIterator::CHILD_FIRST
-        );
-
-        foreach ($files as $fileinfo) {
-            $todo = ($fileinfo->isDir() ? 'rmdir' : 'unlink');
-            $todo($fileinfo->getRealPath());
-        }
-
-        rmdir($downloadPath);
-    }
-
-    public function uninstall(InstalledRepositoryInterface $repo, PackageInterface $package)
-    {
-        // foo
-    }
-
-    protected function removeCode(PackageInterface $package)
-    {
-        // foo
-    }
-
-    protected function removeBinaries(PackageInterface $package)
-    {
-        // foo
     }
 
     /**
