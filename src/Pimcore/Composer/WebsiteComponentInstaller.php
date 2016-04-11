@@ -46,7 +46,7 @@ class WebsiteComponentInstaller extends LibraryInstaller
         foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($downloadPath)) as $file) {
             if (is_file($file->getPathName())) {
                 $relativePath = preg_replace("@^" . preg_quote($downloadPath, "@") . "@", "", $file->getPathName());
-                if (preg_match("@^website/@", $relativePath)) {
+                if (preg_match("@^(website|static)/@", $relativePath)) {
                     $targetFile = $targetPath . $relativePath;
                     if (!is_dir(dirname($targetFile))) {
                         mkdir(dirname($targetFile), 0755, true);
